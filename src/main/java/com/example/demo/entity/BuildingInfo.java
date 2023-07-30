@@ -1,5 +1,4 @@
-package com.example.demo.domain;
-
+package com.example.demo.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -15,14 +14,15 @@ import lombok.ToString;
 @Setter
 @Builder
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-public class AcommodationInfo {
+public class BuildingInfo {
     @Id
-    private int aco_id;
-    private String aco_class;
-    private int hansil;
-    private int yangsil;
-
+    private int building_id;
+    private int upstair;
+    private int downstair;
+    private int startstair;
+    private int endstair;
+    
 }

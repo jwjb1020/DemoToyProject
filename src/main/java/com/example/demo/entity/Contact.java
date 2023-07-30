@@ -1,6 +1,5 @@
-package com.example.demo.domain;
+package com.example.demo.entity;
 
-import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,7 +10,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import lombok.Setter;
 import lombok.ToString;
 
@@ -21,17 +19,16 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Entity
-public class Info {
+public class Contact {
     @Id
-  
-    private int info_id;
-    private String place;
-    private Date start;
-    private Date end;
+   
+    private int contact_id;
     @Column(length = 1024)
-    private String content;
-    private String content_info;
+    private String homepage;
+    private String tel;
+    private String jugwan;
+    
 
+    
 }

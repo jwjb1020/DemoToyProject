@@ -1,9 +1,7 @@
-package com.example.demo.domain;
+package com.example.demo.entity;
 
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-
 import jakarta.persistence.Id;
 
 import lombok.AllArgsConstructor;
@@ -17,18 +15,15 @@ import lombok.ToString;
 @Setter
 @ToString
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-public class Contact {
+public class Festival {
     @Id
-   
+    private int festival_id;
     private int contact_id;
-    @Column(length = 1024)
-    private String homepage;
-    private String tel;
-    private String jugwan;
-    
-
+    private int address_id;
+    private String festival_name;
+    private int info_id;
     
 }

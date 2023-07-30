@@ -1,8 +1,10 @@
-package com.example.demo.domain;
+package com.example.demo.entity;
+
+
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,17 +14,18 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@Builder
 @ToString
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class BuildingInfo {
+public class Acommodation {
     @Id
+    private int acommodation_id;
+    private int contact_id;
+    private int address_id;
+    private String name;
+    private int aco_id;
     private int building_id;
-    private int upstair;
-    private int downstair;
-    private int startstair;
-    private int endstair;
-    
+
 }

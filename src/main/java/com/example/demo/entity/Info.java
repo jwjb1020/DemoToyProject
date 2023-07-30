@@ -1,13 +1,17 @@
-package com.example.demo.domain;
+package com.example.demo.entity;
 
+import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+
 import jakarta.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 import lombok.Setter;
 import lombok.ToString;
 
@@ -15,15 +19,19 @@ import lombok.ToString;
 @Setter
 @ToString
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+
 @Entity
-public class Festival {
+public class Info {
     @Id
-    private int festival_id;
-    private int contact_id;
-    private int address_id;
-    private String festival_name;
+  
     private int info_id;
-    
+    private String place;
+    private Date start;
+    private Date end;
+    @Column(length = 1024)
+    private String content;
+    private String content_info;
+
 }
