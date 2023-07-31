@@ -1,7 +1,6 @@
 package com.example.demo.dto;
 
-import com.example.demo.entity.Member;
-
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,9 +8,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SignInResponseDto {
-    private String token;
-    private int exprTime;  
-    private Member userMember;
+public class SignInDto {
+    @NotBlank
+    private String userId;
+    @NotBlank
+    private String userPassword;
     
 }
