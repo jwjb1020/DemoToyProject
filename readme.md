@@ -26,3 +26,12 @@
     implementation group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
     implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.1'
 </code>  
+
+## 2023.08.02
+- MySql에 데이터를 저장할때 import방식으로 하면 지정한 포린키가 초기화되는 문제
+
+    springboot에 service 폴더에 새로운 클래스 만듬<br>
+    build.gradle에 poi와 관련된 excel읽을 수 있는 implemention 추가해야함<br>
+    entity폴더와 repository폴더에 있는 파일들 수정해야함.<br>
+    data폴더 만들어서 안에 excel파일 데이터 저장해놓음<br>
+    데이터입력의 자세한 방법은 DataInput 클래스 안에 주석으로 처리함.
