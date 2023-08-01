@@ -61,7 +61,7 @@ public class FestivalDataInputService {
                 data.put(i, new ArrayList<String>());
 
                 // 시트 max함수를 이용해서 둘중의 큰것으로 배열 크기 맞추기
-                int lastColumn = Math.max(row.getLastCellNum(), 14);
+                int lastColumn = Math.max(row.getLastCellNum(), 13);
 
                 // 배열을 돌면서 데이터가 있는 칸 속성맞춰주기
                 for (int cn = 0; cn < lastColumn; cn++) {
