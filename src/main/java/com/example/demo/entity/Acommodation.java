@@ -4,6 +4,8 @@ package com.example.demo.entity;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +23,7 @@ import lombok.ToString;
 @Entity
 public class Acommodation {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int acommodation_id;
     private int contact_id;
     private int address_id;

@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import lombok.AllArgsConstructor;
@@ -20,6 +22,7 @@ import lombok.ToString;
 @Entity
 public class AcommodationInfo {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int aco_id;
     private String aco_class;
     private int hansil;
