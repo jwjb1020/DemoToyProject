@@ -18,6 +18,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+
 public class Festival {
     @Id
     private int festival_id;
