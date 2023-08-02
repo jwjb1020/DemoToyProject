@@ -45,7 +45,7 @@ public class FestivalDataInputService {
     public void ExcelFileRead() {
         try {
             // 절대경로 지정
-            String fileLocatioString = "C:/demoProject/ToyProject/demo/src/main/resources/data/data_festival_excel.xlsx";
+            String fileLocatioString = "C:\\DemoToyProject\\src\\main\\resources\\data\\data_festival_excel.xlsx";
             // 절대경로에서 가져온 파일 변수
             FileInputStream file = new FileInputStream(new File(fileLocatioString));
             // 파일을 workbook으로 만드는 함수
@@ -61,7 +61,7 @@ public class FestivalDataInputService {
                 data.put(i, new ArrayList<String>());
 
                 // 시트 max함수를 이용해서 둘중의 큰것으로 배열 크기 맞추기
-                int lastColumn = Math.max(row.getLastCellNum(), 13);
+                int lastColumn = Math.max(row.getLastCellNum(), 14);
 
                 // 배열을 돌면서 데이터가 있는 칸 속성맞춰주기
                 for (int cn = 0; cn < lastColumn; cn++) {
@@ -105,16 +105,14 @@ public class FestivalDataInputService {
             // 첫번째 줄은 제목이라서 1번 생략하고 데이터 읽기
             for (int j = 1; j < sheet.getLastRowNum(); j++) {
                 // 배열의 첫번째부터 데이터 가져오기
-                List<String> rowData = data.get(j);
-                System.out.println(rowData.size());
+                // List<String> rowData = data.get(j);
+                // System.out.println("Padded Row " + j + ": " + rowData);
 
                 // 데이터베이스에 있는 테이블 가져오기
                 Info info = new Info();
                 Address address = new Address();
                 Contact contact = new Contact();
                 Festival festival = new Festival();
-
-                System.out.println("Padded Row " + j + ": " + rowData);
 
                 // 테이블에 넣을 값을 지정
 
@@ -131,7 +129,6 @@ public class FestivalDataInputService {
                     info.setStart(dateStart);
                     info.setEnd(dateEnd);
                 } catch (ParseException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
 
@@ -145,12 +142,12 @@ public class FestivalDataInputService {
                 if (data.get(j).get(13) != "") {
                     address.setLatitude(Float.parseFloat(data.get(j).get(13)));
                 }
-                System.out.println(data.get(j).get(13));
+               
                 if (data.get(j).get(14) != "") {
                     address.setLongitude(Float.parseFloat(data.get(j).get(14)));
                 }
 
-                System.out.println(data.get(j).get(12));
+                
 
                 // string을 float으로 바꾸고 float을 int로 바꾸고 다시 string으로 타입 캐스팅
                 if (data.get(j).get(12) != "") {
@@ -194,8 +191,7 @@ public class FestivalDataInputService {
                     // 중복되는 값을 없에고 포린키 설정을 위해 get으로 addr list에 있는 id 값을 가져와 설정
                     addr = Ar.findBySidoAndSigunguAndEupmyunAndDoro(address.getSido(), address.getSigungu(),
                             address.getEupmyun(), address.getDoro());
-                    System.out.println(addr.toString());
-                    System.out.println(addr.get(0).getAddress_id());
+                    
 
                     festival.setAddress_id(addr.get(0).getAddress_id());
                 }
@@ -213,6 +209,7 @@ public class FestivalDataInputService {
             workbook.close();
         } catch (Exception e) {
             e.printStackTrace();
+
         }
     }
 

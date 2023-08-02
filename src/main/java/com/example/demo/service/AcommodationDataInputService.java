@@ -3,9 +3,11 @@ package com.example.demo.service;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
@@ -16,6 +18,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entity.Acommodation;
+import com.example.demo.entity.AcommodationInfo;
+import com.example.demo.entity.Address;
+import com.example.demo.entity.BuildingInfo;
+import com.example.demo.entity.Contact;
 import com.example.demo.repository.AcommodationInfoRepository;
 import com.example.demo.repository.AcommodationRepository;
 import com.example.demo.repository.AddressRepository;
@@ -28,18 +35,17 @@ public class AcommodationDataInputService {
     private AcommodationInfoRepository Adir;
     @Autowired
     private AcommodationRepository Adr;
-    @Autowired 
+    @Autowired
     private ContactRepository Cr;
-    @Autowired 
+    @Autowired
     private AddressRepository Ar;
     @Autowired
     private BuildingInfoRepository Br;
 
-
     public void ExcelFileReadAcommodation() {
         try {
             // 절대경로 지정
-            String fileLocatioString = "C:/demoProject/ToyProject/demo/src/main/resources/data/acommodation_excel.xlsx";
+            String fileLocatioString = "C:\\DemoToyProject\\src\\main\\resources\\data\\acommodation_excel.xlsx";
             // 절대경로에서 가져온 파일 변수
             FileInputStream file = new FileInputStream(new File(fileLocatioString));
             // 파일을 workbook으로 만드는 함수
@@ -94,6 +100,90 @@ public class AcommodationDataInputService {
                 }
                 // i값 증가시켜서 반복
                 i++;
+            }
+
+            for (int j = 1; j < sheet.getLastRowNum(); j++) {
+                List<String> rowData = data.get(j);
+                System.out.println("Padded Row " + j + ": " + rowData);
+                Acommodation acommodation = new Acommodation();
+                AcommodationInfo acommodationInfo = new AcommodationInfo();
+                BuildingInfo buildingInfo = new BuildingInfo();
+                Contact contact = new Contact();
+                Address address = new Address();
+
+                acommodationInfo.setAco_class(data.get(j).get(7));
+                if (data.get(j).get(12) != "" && data.get(j).get(13) != "") {
+                    acommodationInfo.setHansil((int) Float.parseFloat(data.get(j).get(12)));
+                    acommodationInfo.setYangsil((int) Float.parseFloat(data.get(j).get(13)));
+                }
+                if (data.get(j).get(8) != "") {
+                    buildingInfo.setUpstair((int) Float.parseFloat(data.get(j).get(8)));
+                }
+
+                if (data.get(j).get(9) != "") {
+                    buildingInfo.setDownstair((int) Float.parseFloat(data.get(j).get(9)));
+                }
+                if (data.get(j).get(10) != "") {
+
+                    buildingInfo.setStartstair((int) Float.parseFloat(data.get(j).get(10)));
+                }
+                if (data.get(j).get(11) != "") {
+                    buildingInfo.setEndstair((int) Float.parseFloat(data.get(j).get(11)));
+                }
+
+                contact.setTel(data.get(j).get(0));
+
+                if (data.get(j).get(1) != "") {
+                    String[] addressJibunStrings = data.get(j).get(1).split(" ");
+                    address.setSido(addressJibunStrings[0]);
+                    address.setSigungu(addressJibunStrings[1]);
+                    address.setEupmyun(addressJibunStrings[2]);
+                    String addressJibunEnd = Arrays.stream(addressJibunStrings, 3, addressJibunStrings.length)
+                            .collect(Collectors.joining(" "));
+                    address.setSangse(addressJibunEnd);
+
+                }
+
+                if (data.get(j).get(2) != "") {
+                    String[] addressDoroStrings = data.get(j).get(2).split(" ");
+                    String addressDoroEnd = Arrays.stream(addressDoroStrings, 0, addressDoroStrings.length)
+                            .collect(Collectors.joining(" "));
+
+                    if (addressDoroStrings[2].contains("면")) {
+                        addressDoroEnd = Arrays.stream(addressDoroStrings, 3, addressDoroStrings.length)
+                                .collect(Collectors.joining(" "));
+                        address.setDoro(addressDoroEnd);
+                    } else {
+                        addressDoroEnd = Arrays.stream(addressDoroStrings, 2, addressDoroStrings.length)
+                                .collect(Collectors.joining(" "));
+                        address.setDoro(addressDoroEnd);
+                    }
+
+                }
+
+                if (data.get(j).get(3) != "") {
+                    address.setZip_no(String.format("%d", (int) Float.parseFloat(data.get(j).get(3))));
+                }
+
+                if (data.get(j).get(5) != "") {
+                    address.setX(Float.parseFloat(data.get(j).get(5)));
+                }
+                if (data.get(j).get(6) != "") {
+                    address.setY(Float.parseFloat(data.get(j).get(6)));
+                }
+                Adir.save(acommodationInfo);
+                Cr.save(contact);
+                Br.save(buildingInfo);
+                Ar.save(address);
+
+                acommodation.setName(data.get(j).get(4));
+                acommodation.setAddress_id(address.getAddress_id());
+                acommodation.setBuilding_id(buildingInfo.getBuilding_id());
+                acommodation.setContact_id(contact.getContact_id());
+                acommodation.setAco_id(acommodationInfo.getAco_id());
+
+                Adr.save(acommodation);
+
             }
 
             workbook.close();
