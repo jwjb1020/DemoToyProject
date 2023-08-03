@@ -22,8 +22,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @Entity
 public class Member {
-    @Id
+   
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int userIdNumber;
+    @Id
     private String userId;
     private String userPassword;
     private String userName;

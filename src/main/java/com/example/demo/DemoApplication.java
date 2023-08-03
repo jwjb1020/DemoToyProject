@@ -15,14 +15,14 @@ public class DemoApplication {
 
 
 	//모든 restController 위에 cors 정책 @Bean으로 만들기
-	@Bean
-	public WebMvcConfigurer corsConfigurer(){
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry){
-				registry.addMapping("/**").allowedOriginPatterns("http://localhost:3000/login");				
-			}
-		};
-	}
+	// @Bean
+	// public WebMvcConfigurer corsConfigurer(){
+	// 	return new WebMvcConfigurer() {
+	// 		@Override
+	// 		public void addCorsMappings(CorsRegistry registry){
+	// 			registry.addMapping("/**").allowedOriginPatterns("http://localhost:3000/login");				
+	// 		}
+	// 	};
+	// }
 
 }
