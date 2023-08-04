@@ -13,7 +13,6 @@ public class ResponseDto <D> {
     //성공했을때 만들어주는 인스턴스
     public static <D> ResponseDto<D> setSuccess(String message, D data){
         return ResponseDto.set(true, message, data);
-
     } 
     
     //실패했을때 만들어주는 인스턴스

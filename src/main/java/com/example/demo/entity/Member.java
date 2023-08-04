@@ -22,19 +22,19 @@ import lombok.ToString;
 @AllArgsConstructor
 @Entity
 public class Member {
-   
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userIdNumber;
+
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
     private String userId;
     private String userPassword;
     private String userName;
     private String userRole;
 
-    public Member(SignUpDto dto){
+    public Member(SignUpDto dto) {
         this.userId = dto.getUserId();
-        this.userPassword =dto.getUserPassword();
+        this.userPassword = dto.getUserPassword();
         this.userName = dto.getUserName();
-        this.userRole =dto.getUserRole();
+        this.userRole = dto.getUserRole();
     }
 }

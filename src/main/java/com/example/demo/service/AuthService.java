@@ -46,6 +46,8 @@ public class AuthService {
 
         // MemberRepo를 이용해서 데이터베이스에 member entity저장!
         try {
+
+            member.setUserRole("Role_Member");
             memberRepository.save(member);
 
         } catch (Exception e) {
@@ -60,20 +62,18 @@ public class AuthService {
     public ResponseDto<SignInResponseDto> signIn(SignInDto dto) {
         String userId = dto.getUserId();
         String userpassword = dto.getUserPassword();
-
+        Member member = null;
+        try {
+            member = memberRepository.findById(userId).get();
+        } catch (NoSuchElementException e) {
+            return ResponseDto.setFailed("해당회원을 찾을 수 없습니다.");
+        }
         try {
             boolean existed = memberRepository.existsByUserIdAndUserPassword(userId, userpassword);
             if (!existed)
                 return ResponseDto.setFailed("로그인 정보가 일치하지 않습니다.");
         } catch (Exception e) {
             return ResponseDto.setFailed("데이터베이스 에러1");
-        }
-
-        Member member = null;
-        try {
-            member = memberRepository.findById(userId).get();
-        } catch (NoSuchElementException e) {
-            return ResponseDto.setFailed("해당회원을 찾을 수 없습니다.");
         }
 
         member.setUserPassword("");
