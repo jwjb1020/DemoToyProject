@@ -1,6 +1,10 @@
 package com.example.demo.entity;
 
 
+import com.example.demo.dto.FindDto;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +31,17 @@ public class Festival {
     private int festival_id;
     private int contact_id;
     private int address_id;
-    private String festival_name;
+    @Column(name = "festival_name")
+    private String festivalName;
     private int info_id;
+
+
+    public Festival(String festivalName) {
+      
+        this.festivalName = festivalName;
+        
+       
+    }
+   
     
 }

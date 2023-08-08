@@ -45,7 +45,7 @@ public class FestivalDataInputService {
     public void ExcelFileRead() {
         try {
             // 절대경로 지정
-            String fileLocatioString = "C:\\DemoToyProject\\src\\main\\resources\\data\\data_festival_excel.xlsx";
+            String fileLocatioString = "C:/DemoToyProject/DemoToyProject_Backend/src/main/resources/data/data_festival_excel.xlsx";
             // 절대경로에서 가져온 파일 변수
             FileInputStream file = new FileInputStream(new File(fileLocatioString));
             // 파일을 workbook으로 만드는 함수
@@ -175,7 +175,7 @@ public class FestivalDataInputService {
                     address.setSangse(addressFromIndex3ToEnd);
                 }
 
-                festival.setFestival_name(data.get(j).get(0));
+                festival.setFestivalName(data.get(j).get(0));
 
                 // Address 클래스에 있는 객채를 list로 변환
                 List<Address> addr = null;
