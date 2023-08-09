@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.FindAllFestival;
 import com.example.demo.entity.Festival;
 import com.example.demo.service.FindService;
 
@@ -23,5 +24,13 @@ public class FindController {
         
         return findService.find(festivalName);  
     }
+    @GetMapping("/findall")
+    public List<FindAllFestival> findAllFestival(@RequestParam("festivalName") String festivalName){
+        
+        return findService.findAll(festivalName);  
+    }
+
+
+
 }
 
