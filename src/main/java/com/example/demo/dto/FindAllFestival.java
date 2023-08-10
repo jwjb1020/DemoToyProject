@@ -33,7 +33,7 @@ public class FindAllFestival {
     private String tel;
     private String homepage;
     private String jugwan;
-    private float latitude;
-    private float longitude;
+    private Float latitude;
+    private Float longitude;
 
 }

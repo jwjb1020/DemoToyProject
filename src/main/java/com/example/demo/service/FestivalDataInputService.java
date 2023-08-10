@@ -45,7 +45,7 @@ public class FestivalDataInputService {
     public void ExcelFileRead() {
         try {
             // 절대경로 지정
-            String fileLocatioString = "C:/DemoToyProject/DemoToyProject_Backend/src/main/resources/data/data_festival_excel.xlsx";
+            String fileLocatioString = "C:/DemoToyProject/DemoToyProject_Backend/src/main/resources/data/new_data_festival_v2.xlsx";
             // 절대경로에서 가져온 파일 변수
             FileInputStream file = new FileInputStream(new File(fileLocatioString));
             // 파일을 workbook으로 만드는 함수
@@ -105,8 +105,8 @@ public class FestivalDataInputService {
             // 첫번째 줄은 제목이라서 1번 생략하고 데이터 읽기
             for (int j = 1; j < sheet.getLastRowNum(); j++) {
                 // 배열의 첫번째부터 데이터 가져오기
-                // List<String> rowData = data.get(j);
-                // System.out.println("Padded Row " + j + ": " + rowData);
+                List<String> rowData = data.get(j);
+                System.out.println("Padded Row " + j + ": " + rowData);
 
                 // 데이터베이스에 있는 테이블 가져오기
                 Info info = new Info();
@@ -139,15 +139,15 @@ public class FestivalDataInputService {
                 contact.setTel(data.get(j).get(6));
                 contact.setHomepage(data.get(j).get(7));
 
-                if (data.get(j).get(13) != "") {
-                    address.setLatitude(Float.parseFloat(data.get(j).get(13)));
-                }
-               
-                if (data.get(j).get(14) != "") {
-                    address.setLongitude(Float.parseFloat(data.get(j).get(14)));
-                }
+                if (data.get(j).size() >= 15) {
+                    if (data.get(j).get(13) != "") {
+                        address.setLatitude(Float.parseFloat(data.get(j).get(13)));
+                    }
 
-                
+                    if (data.get(j).get(14) != "") {
+                        address.setLongitude(Float.parseFloat(data.get(j).get(14)));
+                    }
+                }
 
                 // string을 float으로 바꾸고 float을 int로 바꾸고 다시 string으로 타입 캐스팅
                 if (data.get(j).get(12) != "") {
@@ -191,7 +191,6 @@ public class FestivalDataInputService {
                     // 중복되는 값을 없에고 포린키 설정을 위해 get으로 addr list에 있는 id 값을 가져와 설정
                     addr = Ar.findBySidoAndSigunguAndEupmyunAndDoro(address.getSido(), address.getSigungu(),
                             address.getEupmyun(), address.getDoro());
-                    
 
                     festival.setAddress_id(addr.get(0).getAddress_id());
                 }

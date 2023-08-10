@@ -13,27 +13,27 @@ import com.example.demo.service.FestivalDataInputService;
 
 @SpringBootTest
 class DemoApplicationTests {
-	// @Autowired
-	// private FestivalDataInputService festivalDataInputService;
-	// @Autowired
-	// private AcommodationDataInputService acommodationDataInputService;
-	// @Test
-	// void contextLoads() {
-	// 	festivalDataInputService.ExcelFileRead();
-	// 	acommodationDataInputService.ExcelFileReadAcommodation();
-
-	// }
 	@Autowired
-	FindAllFestivalRepository repo;
+	private FestivalDataInputService festivalDataInputService;
+	@Autowired
+	private AcommodationDataInputService acommodationDataInputService;
 	@Test
-	public void Test(){
-	   List<FindAllFestival> a =repo.findAll();
-	   System.out.println("test : "+a.size());
-	   for(FindAllFestival f: a){
-		System.out.println(f);
-	   }
+	void contextLoads() {
+		festivalDataInputService.ExcelFileRead();
+		acommodationDataInputService.ExcelFileReadAcommodation();
+
+	}
+	// @Autowired
+	// FindAllFestivalRepository repo;
+	// @Test
+	// public void Test(){
+	//    List<FindAllFestival> a =repo.findAll();
+	//    System.out.println("test : "+a.size());
+	//    for(FindAllFestival f: a){
+	// 	System.out.println(f);
+	//    }
 		
 	}
 	
 
-}
+
