@@ -45,7 +45,7 @@ public class FestivalDataInputService {
     public void ExcelFileRead() {
         try {
             // 절대경로 지정
-            String fileLocatioString = "C:/DemoToyProject/DemoToyProject_BackEnd/src/main/resources/data/new_data_festival_v2.xlsx";
+            String fileLocatioString = "C:/DemoToyProject/DemoToyProject_Backend/src/main/resources/data/new_data_festival_v2.xlsx";
             // 절대경로에서 가져온 파일 변수
             FileInputStream file = new FileInputStream(new File(fileLocatioString));
             // 파일을 workbook으로 만드는 함수

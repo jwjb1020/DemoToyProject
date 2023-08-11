@@ -45,7 +45,7 @@ public class AcommodationDataInputService {
     public void ExcelFileReadAcommodation() {
         try {
             // 절대경로 지정
-            String fileLocatioString = "C:/DemoToyProject/DemoToyProject_BackEnd/src/main/resources/data/acommodation_excel.xlsx";
+            String fileLocatioString = "C:/DemoToyProject/DemoToyProject_Backend/src/main/resources/data/new_acommodation_excel_latlng.xlsx";
             // 절대경로에서 가져온 파일 변수
             FileInputStream file = new FileInputStream(new File(fileLocatioString));
             // 파일을 workbook으로 만드는 함수
@@ -171,6 +171,16 @@ public class AcommodationDataInputService {
                 if (data.get(j).get(6) != "") {
                     address.setY(Float.parseFloat(data.get(j).get(6)));
                 }
+                if (data.get(j).size() >= 16) {
+                    if (data.get(j).get(13) != "") {
+                        address.setLatitude(Float.parseFloat(data.get(j).get(14)));
+                    }
+
+                    if (data.get(j).get(14) != "") {
+                        address.setLongitude(Float.parseFloat(data.get(j).get(15)));
+                    }
+                }
+
                 Adir.save(acommodationInfo);
                 Cr.save(contact);
                 Br.save(buildingInfo);
