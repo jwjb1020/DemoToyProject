@@ -9,4 +9,5 @@ import com.example.demo.dto.FindAllFestival;
 public interface FindAllFestivalRepository extends JpaRepository <FindAllFestival,Integer>{
     //이름으로 모든 연관된 정보 찾기
     List<FindAllFestival> findByFestivalNameContaining(String festivalName);
+   
 }
