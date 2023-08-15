@@ -24,6 +24,8 @@ public class FindController {
     FindService findService;
     @Autowired
     SelectFestivalRepo sRepo;
+    @Autowired
+    FindAllFestivalRepository faRepo;
 
     @GetMapping("/find")
     public List<Festival> findFestival(@RequestParam("festivalName") String festivalName) {
@@ -46,5 +48,8 @@ public class FindController {
     public List<SelectFestival> findFestivalList(){
         return sRepo.findAll();
         }
-
+    @GetMapping("/findFestivalAllList")
+    public List<FindAllFestival> findFestivalAllList(@RequestParam("address") String address){
+        return faRepo.findByAddressContaining(address);
+    }
 }
